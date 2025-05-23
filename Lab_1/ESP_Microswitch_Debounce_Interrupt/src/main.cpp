@@ -15,9 +15,14 @@ Adafruit_SSD1306 display_handler(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET)
 #define PIN_LIMIT_SWITCH 15
 
 volatile bool switchPressed;
+volatile bool lastState;
+volatile int count;
 
 void IRAM_ATTR switchPressedISR() {
   switchPressed = gpio_get_level((gpio_num_t)PIN_LIMIT_SWITCH);
+  if (switchPressed && lastState == 0) {
+    count++;
+  }
 }
 
 void OledSetup(){
@@ -37,7 +42,10 @@ void setup() {
   OledSetup(); //setup OLED
   pinMode(PIN_LIMIT_SWITCH, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(PIN_LIMIT_SWITCH), switchPressedISR, CHANGE);
+
   switchPressed = false;
+  count = 0;
+  lastState = 0;
 }
 
 
@@ -45,13 +53,19 @@ void loop() {
   if (switchPressed) {
     display_handler.setCursor(0,0);
     display_handler.clearDisplay();
-    display_handler.println("Switch pressed!");  
+    display_handler.print("count: ");   
+    display_handler.println(count);   
     display_handler.display();
+
+    lastState = 1;
   } else {
     display_handler.setCursor(0,0);
     display_handler.clearDisplay();
-    display_handler.println("Switch not pressed...");
+    display_handler.print("count: ");
+    display_handler.println(count);    
     display_handler.display();
+
+    lastState = 0;
   }
 
   delay(500);
