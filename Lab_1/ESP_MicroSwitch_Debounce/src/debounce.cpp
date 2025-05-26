@@ -12,7 +12,7 @@
 #define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
 Adafruit_SSD1306 display_handler(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
-#define PIN_LIMIT_SWITCH 15
+#define PIN_LIMIT_SWITCH 12
 
 bool switchPressed;
 
