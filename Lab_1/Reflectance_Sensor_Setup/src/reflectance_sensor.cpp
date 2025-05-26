@@ -38,7 +38,7 @@ void OledSetup(){
 
 void setup() {
   OledSetup(); //setup OLED
-  pinMode(PIN_REFLECTANCE_OUTPUT, INPUT_PULLUP);
+  pinMode(PIN_REFLECTANCE_OUTPUT, INPUT);
   attachInterrupt(digitalPinToInterrupt(PIN_REFLECTANCE_OUTPUT), reflectance_change_ISR, CHANGE);
   reflectance = digitalRead(PIN_REFLECTANCE_OUTPUT);
 }
