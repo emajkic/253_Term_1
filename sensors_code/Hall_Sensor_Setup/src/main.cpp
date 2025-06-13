@@ -25,5 +25,7 @@ void loop() {
   Serial.print("RIGHT: ");
   Serial.println(hall_right_reading);
   
-  delay(500);    
+  Serial.println("-------------------------");
+  
+  delay(1000);    
 }
