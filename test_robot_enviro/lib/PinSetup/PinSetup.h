@@ -9,10 +9,13 @@
 */
 
 // PWM Channels //
-const int pwmChannel1 = 1;
+const int pwmChannelFL = 0;
+const int pwmChannelBL = 1;
+const int pwmChannelFR = 2;
+const int pwmChannelBR = 3;
 
 // PID //
-const int LEFT_QRD_PIN = 1; //change
-const int RIGHT_QRD_PIN = 2;
+const int LEFT_QRD_PIN = 32; //change
+const int RIGHT_QRD_PIN = 33;
 
 #endif

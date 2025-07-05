@@ -4,12 +4,22 @@
 #include <Arduino.h>
 #include <cmath>
 
+enum class Direction {
+    FORWARD,
+    BACKWARD
+};
+
+enum class Side {
+    LEFT,
+    RIGHT
+};
+
 class Motor {
     public:
        /*
        * Class constructor
        */
-       Motor(int pinA, int pinB);
+       Motor(int pinF, int pinB, Side side);
 
        /*
        * Stop motor, ie. set speed to 0
@@ -19,21 +29,23 @@ class Motor {
        /*
        * Set speed of motor 
        * 
-       * @param speed   speed to set the motor; int. between 0-4095
+       * @param speed         speed to set the motor; int. between 0-4095
+       * @param direction     direction to spin with set speed
        */
-       void setSpeed(int speed);
+       void setSpeed(int speed, Direction direction);
 
        /*
-       * Get speed of motor 
-       *
-       * @return the current speed of the motor 
+       * Getters
        */
        int getSpeed();
+       Direction getDirection();
        
     private:
-        int pinA; //should we rename this to pinCW and pin CCW????
-        int pinB;
+        Direction spinDir;
+        int pinF; // Forward pin
+        int pinB; // Backward pin
         int speed;
+        Side side;
 };
 
 #endif

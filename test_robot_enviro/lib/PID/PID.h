@@ -15,7 +15,7 @@ class PID {
         /*
         * Class Constructor
         */
-        PID(PIDType pidType, Motor leftMotor, Motor rightMotor); //add more param once figured out
+        PID(PIDType pidType, Motor &leftMotor, Motor &rightMotor); //add more param once figured out
 
         /*
         * Use PID control loop
@@ -45,6 +45,8 @@ class PID {
         int getKI() { return this->KI; }
         int getKD() { return this->KD; }
 
+        int getErrorLine(); 
+
        //ADD WAY MORE AS NEEDED, + THINGS RELATED TO SPEED
 
     private:
@@ -52,12 +54,22 @@ class PID {
         int KP;
         int KD;
         int KI;
-        int error;
-        int lastError;
+
+        long lastTime;
+        long timeOfLastChange;
+
+        volatile int error;
+        volatile int lastError;
+        volatile int lastDifferentError;
+
         Motor &leftMotor;
         Motor &rightMotor;
 
-        void getError();
+        void doPIDLine();
+        void doPIDCompass();
+
+        //int getErrorLine(); MOVED UP FOR TEST
+        int getErrorCompass();
 };
 
 #endif
