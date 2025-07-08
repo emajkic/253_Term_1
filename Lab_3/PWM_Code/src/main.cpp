@@ -16,7 +16,7 @@ int pot_read = 0;
 void setup() {
   adc1_config_width(ADC_WIDTH_12Bit);
   adc1_config_channel_atten(ADC1_CHANNEL_0,ADC_ATTEN_DB_12); // ADC1_CHANNEL_0 = pin 36
-  ledcSetup(pwmChannel1,500,12); // (pwmchannel to use,  frequency in Hz, number of bits) NOTE: frequency affect speed range
+  ledcSetup(pwmChannel1,250,12); // (pwmchannel to use,  frequency in Hz, number of bits) NOTE: frequency affect speed range
   ledcAttachPin(outA,pwmChannel1);
   ledcAttachPin(outB,pwmChannel1);
 }
